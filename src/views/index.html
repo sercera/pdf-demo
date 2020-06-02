@@ -52,16 +52,20 @@
   <div style="margin: 0 auto; width: 50%;">
     <label for="url">Enter site URL:</label>
     <input id="url" name="url" class="text" type="text" placeholder="http://google.com"/>
-    <input type="button" value="Generate PDF" onclick="submit()"/>
+    <input type="button" value="Generate PDF" onclick="submit('pdf')"/>
+    <input type="button" value="Generate IMAGE" onclick="submit('image')"/>
     <div style="display: none; margin:0 auto; color:#1783e7" name="spinner" class="loader" role="status"> </div>
   </div>
 
   <script>
-    function submit() {
+    function submit(type) {
+      const url=document.getElementById('url').value;
+      if (!url){
+        return alert('Please enter url!')
+      }
       document.getElementsByName("url")[0].disabled = true
       document.getElementsByName("spinner")[0].style.display = "block";
-      const url=document.getElementById('url').value;
-      window.location.href="https://pdf-demo.ncoded.xyz/api/pdf/generate/?url="+url
+      window.location.href="https://pdf-demo.ncoded.xyz/api/pdf/generate-"+type+"/?url="+url
     }
 
   </script>
