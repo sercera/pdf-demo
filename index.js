@@ -23,7 +23,7 @@ process.on('uncaughtException', (error) => {
 
 function initializeEnvironment() {
   dotenv.config();
-  const envConfig = dotenv.parse(fs.readFileSync('.env.local'));
+  const envConfig = dotenv.parse(fs.readFileSync('.env'));
   for (const k in envConfig) {
     process.env[k] = envConfig[k];
   }
