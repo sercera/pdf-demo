@@ -11,7 +11,7 @@
       box-sizing: border-box;
     }
     
-    input[type=submit] {
+    input[type=button] {
       width: 100%;
       background-color: rgb(72, 143, 236);
       color: white;
@@ -22,7 +22,7 @@
       cursor: pointer;
     }
     
-    input[type=submit]:hover {
+    input[type=button]:hover {
       background-color: #1783e7;
     }
     
@@ -31,21 +31,39 @@
       background-color: #f2f2f2;
       padding: 20px;
     }
+    .loader {
+      border: 8px solid grey; /* Light grey */
+      border-top: 8px solid #3498db; /* Blue */
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
     </style>
 <head>
   <meta charset="utf-8">
   <title>Forms in Node.js</title>
 </head>
 <body>
-  <form action="https://pdf-demo.ncoded.xyz/api/pdf/generate/" method="POST">
   <div style="margin: 0 auto; width: 50%;">
     <label for="url">Enter site URL:</label>
-    <input name="url" class="text" type="text" placeholder="http://example.com"/>
-    <input type="submit" value="Generate PDF"/>
+    <input id="url" name="url" class="text" type="text" value="http://google.com"/>
+    <input type="button" value="Generate PDF" onclick="submit()"/>
+    <div style="display: none; margin:0 auto; color:#1783e7" name="spinner" class="loader" role="status"> </div>
   </div>
-  </form>
 
   <script>
+    function submit() {
+      document.getElementsByName("url")[0].disabled = true
+      document.getElementsByName("spinner")[0].style.display = "block";
+      const url=document.getElementById('url').value;
+      window.location.href="https://pdf-demo.ncoded.xyz/api/pdf/generate/?url="+url
+    }
+
   </script>
 </body>
 </html>

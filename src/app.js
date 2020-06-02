@@ -3,6 +3,7 @@ const compression = require('compression');
 const helmet = require('helmet');
 const logger = require('morgan');
 const express = require('express');
+const path = require('path');
 const apiRoutes = require('./routes');
 
 
@@ -17,10 +18,13 @@ app.use(helmet());
 app.use('/', express.static('public'));
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 
 app.use('/api', apiRoutes);
+app.get('/', async (req, res) => {
+  res.sendFile(path.join(`${__dirname}/views/index.html`));
+});
 
 // app.use('/api', v1Routes);
 
